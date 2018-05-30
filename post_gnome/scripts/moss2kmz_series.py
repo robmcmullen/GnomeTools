@@ -63,7 +63,7 @@ def buildkmzSeries(mossSeriesFilename, printDiagnostic=False):
     seriesDescription = GetDescription(mossSeriesFilename)
 
     outfilename = basePathAndName+".kmz"
-    print "rendering: %s"%outfilename
+    print("rendering: %s"%outfilename)
     
     BestGuess_Series = []
     Uncertainty_Series = []
@@ -71,7 +71,7 @@ def buildkmzSeries(mossSeriesFilename, printDiagnostic=False):
 
     for i in range(0,999) :
         mossfilename =  "%s%03d"%(basePathAndName,i)
-        print "Processing",mossfilename
+        print("Processing",mossfilename)
         
         extension = ".ms3"
         if not os.path.exists(mossfilename + extension):
@@ -142,7 +142,7 @@ def buildkmzSeries(mossSeriesFilename, printDiagnostic=False):
         and len(Uncertainty_Series) == 0
         and len(Polygon_Series) == 0
         ):
-        print "no files processed"
+        print("no files processed")
         return
     
     # set the end times
@@ -169,9 +169,9 @@ def buildkmzSeries(mossSeriesFilename, printDiagnostic=False):
     kmzfile.writestr(Name+".kml", kmlstring)
     kmzfile.close() 
         
-    if printDiagnostic: print kmlstring
+    if printDiagnostic: print(kmlstring)
     
-    print "done: created:", outfilename  
+    print("done: created:", outfilename)  
     
     
 def GetDescription(mossfilename):
@@ -292,18 +292,18 @@ if __name__ == "__main__":
         if len(ext) == 3 and ext[:2].lower() == 'ms':
             # this looks like it has a moss extension, so strip it.
             filePath = filePath[:-4]
-        print "Building KMZ for:", filePath
+        print("Building KMZ for:", filePath)
         buildkmzSeries(filePath)
     else:
         ''' 
         If called with no argument, run the sample files.
         '''
-        print "***************"
-        print "No argument provided.  Processing the sample files..."
-        print "***************"
+        print("***************")
+        print("No argument provided.  Processing the sample files...")
+        print("***************")
         
         script_dir = os.path.abspath(os.path.dirname(sys.argv[0]))
-        print "script_dir:", script_dir
+        print("script_dir:", script_dir)
         test_data = os.path.normpath(os.path.join(script_dir,
             "../tests/test_moss2kmz/sample_data/test_series_short/test_moss000"))
         buildkmzSeries(test_data)

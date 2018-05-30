@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 # for py2/3 compatibility
-from __future__ import absolute_import, division, print_function, unicode_literals
+
 
 
 """
@@ -13,7 +13,7 @@ CF standard (or SOME standard..)
 
 """
 
-from __future__ import division
+
 # from datetime import datetime
 
 import numpy as np
@@ -150,7 +150,7 @@ class Writer(object):
         self.nc = nc
 
         # Global attributes
-        for (name, value) in self.file_attributes.items():
+        for (name, value) in list(self.file_attributes.items()):
             setattr(nc, name, value)
 
         # Dimensions
@@ -159,7 +159,7 @@ class Writer(object):
 
         # required variables
         time = nc.createVariable('time', np.int32, ('time',))
-        for name, value in self.var_attributes['time'].items():
+        for name, value in list(self.var_attributes['time'].items()):
             time.setncattr(name, value)
         # make sure there are some units there
         # this will get overwritten when the proper reference time is known
@@ -171,7 +171,7 @@ class Writer(object):
             time.units = 'seconds since {0}'.format(self.ref_time.isoformat())
 
         pc = nc.createVariable('particle_count', np.int32, ('time',))
-        for name, value in self.var_attributes['particle_count'].items():
+        for name, value in list(self.var_attributes['particle_count'].items()):
             pc.setncattr(name, value)
         self.time_var = time
 
@@ -200,19 +200,19 @@ class Writer(object):
             if self.ref_time is None:
                 self.ref_time = timestamp
             nc.variables['time'].units = 'seconds since {0}'.format(self.ref_time.isoformat())
-            for key, val in data.iteritems():
+            for key, val in data.items():
                 val = np.asarray(val)
                 var = nc.createVariable(key, datatype=val.dtype, dimensions=('data'))
                 # if it's a standard variable, add the attributes
                 if key in self.var_attributes:
-                    for name, value in self.var_attributes[key].items():
+                    for name, value in list(self.var_attributes[key].items()):
                         var.setncattr(name, value)
 
-        particle_count = len(data.itervalues().next())  # length of an arbitrary array
+        particle_count = len(next(iter(data.values())))  # length of an arbitrary array
         nc.variables['particle_count'][self.current_timestep] = particle_count
         nc.variables['time'][self.current_timestep] = (timestamp - self.ref_time).total_seconds()
         self.current_timestep += 1
-        for key, val in data.iteritems():
+        for key, val in data.items():
             var = nc.variables[key]
             if len(val) != particle_count:
                 raise ValueError("All data arrays must be the same length")
@@ -277,7 +277,7 @@ class Reader(object):
         """
         return the names of all the variables associated with the particles
         """
-        return [var for var in self.nc.variables.keys() if var not in SPECIAL_VARIABLES]
+        return [var for var in list(self.nc.variables.keys()) if var not in SPECIAL_VARIABLES]
 
     def __str__(self):
         return ("nc_particles Reader object:\n"

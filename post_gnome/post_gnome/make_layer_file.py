@@ -4,7 +4,7 @@ import matplotlib.colors as colors
 
 cnames = colors.cnames
 # Add the single letter colors.
-for name, rgb in colors.ColorConverter.colors.iteritems():
+for name, rgb in colors.ColorConverter.colors.items():
     hex_ = colors.rgb2hex(rgb)
     cnames[name] = hex_
 
@@ -235,7 +235,7 @@ def contours(package_dir, fn, params):
     filename = os.path.join(package_dir,'layers',fn + '.json')
     f = file(filename,'w')
 
-    if params.has_key('Uncertain'):
+    if 'Uncertain' in params:
 
         layer_classes = [
               {
@@ -271,7 +271,7 @@ def contours(package_dir, fn, params):
               }
             ]
 
-    elif params.has_key('SinglePoly'):
+    elif 'SinglePoly' in params:
     
 
         layer_classes = [

@@ -22,5 +22,5 @@ file(outfilename,'w').write(data)
 
 file('junk.png','w').write(base64.b64decode(data))
 
-print data
+print(data)
 

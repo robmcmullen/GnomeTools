@@ -1,5 +1,6 @@
 from post_gnome.plotting import geo_plots
-reload(geo_plots)
+import imp
+imp.reload(geo_plots)
 import matplotlib.pyplot as plt
 import datetime
 import cartopy.crs as ccrs

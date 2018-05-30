@@ -33,7 +33,7 @@ def buildkmz(mossfilename):
     mytemplate = Template(LE_Template)
 
     outfilename = mossfilename+".kmz"
-    print "rendering: %s"%outfilename
+    print("rendering: %s"%outfilename)
 
     kmlstring = mytemplate.render(LEs=BestGuess, LEs_U=Uncertainty, IconName="DotIcon", name=Name)
 

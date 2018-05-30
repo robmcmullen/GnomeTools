@@ -6,7 +6,7 @@ Code for workign with particle fiels in mkz
 Only handles reading for now
 """
 # for py2/3 compatibility
-from __future__ import absolute_import, division, print_function, unicode_literals
+
 
 import os
 import zipfile

@@ -51,7 +51,7 @@ params['folder_path'] = ['Green Canyon 248 Incident',
 
 # make directory structure
 try:
-    print "removing:", package_dir
+    print("removing:", package_dir)
     shutil.rmtree(package_dir)
 except OSError:
     pass
@@ -68,7 +68,7 @@ try:
     shutil.copy(attachments, os.path.join(package_dir, 'attachments', attach_file))
     params['attachment_file'] = attach_file
 except:
-    print 'No attachments'
+    print('No attachments')
     params['attachment_file'] = None
 
 if plot_type == 'points':
@@ -98,7 +98,7 @@ elif plot_type == 'contours':
     traj_zipfname = nc2shape.contours(fn, package_dir, t2convert)
     if uncertain:
         ufn = os.path.join(gnome_dir, outfile.split('.')[0] + '_uncert.nc')
-        print "uncertainty file name:", ufn
+        print("uncertainty file name:", ufn)
         uncert_zipfname = nc2shape.contours(ufn,
                                             package_dir,
                                             t2convert,
@@ -121,6 +121,6 @@ elif plot_type == 'contours':
         make_layer_file.contours(package_dir,'uncert',params)
 
 else:
-    print 'Must specify either points or contours'
+    print('Must specify either points or contours')
 
 shutil.make_archive(package_dir,'zip',root_dir=package_dir)

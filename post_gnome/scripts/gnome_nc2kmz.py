@@ -17,8 +17,8 @@ if __name__ == "__main__":
 
     kmz_filename = nc_filename.rstrip('.nc') + ".kmz"
 
-    print "processing:", nc_filename
-    print "creating:", kmz_filename
+    print("processing:", nc_filename)
+    print("creating:", kmz_filename)
 
     pf = nc_particles.Reader(nc_filename)
     data = pf.get_all_timesteps()

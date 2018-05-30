@@ -7,7 +7,7 @@ module that supports writng kml / kmz for trajectory files
 from mako.template import Template
 import zipfile, base64
 import os,sys
-import kml_templates
+from . import kml_templates
 
 def write_kmz(kmz_filename, times, best_guess_positions):
     """
@@ -27,7 +27,7 @@ def write_kmz(kmz_filename, times, best_guess_positions):
 
     mytemplate = Template(kml_templates.LE_Template)
 
-    print "rendering: %s"%kmz_filename
+    print("rendering: %s"%kmz_filename)
 
     for i, dt in enumerate(times):
         bestGuessLEs = best_guess_positions[i]
@@ -102,8 +102,8 @@ def write_kmz(kmz_filename, times, best_guess_positions):
     kmzfile.writestr(Name+".kml", kmlstring)
     kmzfile.close() 
         
-    if printDiagnostic: print kmlstring
+    if printDiagnostic: print(kmlstring)
     
-    print "done" 
+    print("done") 
 
 

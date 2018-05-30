@@ -1,5 +1,6 @@
 from post_gnome.plotting import geo_plots
-reload(geo_plots)
+import imp
+imp.reload(geo_plots)
 
 import matplotlib.pyplot as plt
 import datetime
@@ -18,7 +19,7 @@ bathy = Reader(bathy_file)
 
 for rec, geo in zip(bathy.records(), bathy.geometries()):
     if rec.attributes['DEPTH_METR'] in ['1000m']:
-        print rec.attributes['DEPTH_METR']
+        print(rec.attributes['DEPTH_METR'])
         for g in geo:
             x = g.xy[0]
             y = g.xy[1]
